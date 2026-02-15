@@ -87,19 +87,8 @@ class PropertiesDesign(context: Context) : Design<PropertiesDesign.Request>(cont
     }
 
     fun inputName() {
-        launch {
-            val name = context.requestModelTextInput(
-                initial = profile.name,
-                title = context.getText(R.string.name),
-                hint = context.getText(R.string.properties),
-                error = context.getText(R.string.should_not_be_blank),
-                validator = ValidatorNotBlank
-            )
-
-            if (name != profile.name) {
-                profile = profile.copy(name = name)
-            }
-        }
+        // 禁止手动修改名称：名称由订阅链接返回的 Content-Disposition filename* 自动决定
+        return
     }
 
     fun inputUrl() {
